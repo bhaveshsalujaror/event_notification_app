@@ -6,6 +6,7 @@
 
     <div class="col-4">
       <%= link_to "Logout", destroy_user_session_path, method: :delete, class: 'btn btn-danger mt-3 mb-5' %>
+
     </div>
     
   </div>
@@ -57,5 +58,7 @@
     </div>
   </div>
 </div>
+
+<%= render partial: 'event_table', locals: { events: @events } %>
 
 
