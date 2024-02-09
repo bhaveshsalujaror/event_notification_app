@@ -1,11 +1,14 @@
-<h1>Events#index</h1>
-<p>Find me in app/views/events/index.html.erb</p>
-<%= link_to 'Sign in', new_user_session_path %>
+<div class="container mt-4">  
+  <h1>Events#index</h1>
+  <p>Find me in app/views/events/index.html.erb</p>
+  <%= link_to 'Sign in', new_user_session_path, class: 'btn btn-primary' %>
 
 
-<h1>Create Event A</h1>
-<%= link_to "Create Event A", create_event_a_path, method: :get %>
+  <h1>Create Event A</h1>
+  <%= link_to "Create Event A", create_event_a_path, method: :get, class: 'btn btn-success' %>
 
 
-<h1>Create Event B</h1>
-<%= link_to "Create Event B", create_event_b_path, method: :get %>
+  <h1>Create Event B</h1>
+  <%= link_to "Create Event B", create_event_b_path, method: :get, class: 'btn btn-primary' %>
+</div>
+
