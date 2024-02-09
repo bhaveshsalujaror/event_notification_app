@@ -42,7 +42,7 @@ class EventsController < ApplicationController
       IterableApiService.send_event_to_iterable(event.title, current_user)
       true
     else
-      flash[:alert] = "#{message} Creation Unsuccessful"
+      flash[:alert] = event.errors.any?? event.errors.full_messages :  "#{message} Creation Unsuccessful"
       false
     end
   end
