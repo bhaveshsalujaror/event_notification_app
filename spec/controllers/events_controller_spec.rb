@@ -1,5 +1,3 @@
-# spec/controllers/events_controller_spec.rb
-
 require 'rails_helper'
 
 RSpec.describe EventsController, type: :controller do
@@ -7,9 +5,7 @@ RSpec.describe EventsController, type: :controller do
   let(:event_a_params) { { event: attributes_for(:event, user: user, title: "Test Event A") } }
   let(:event_b_params) { { event: attributes_for(:event, user: user, title: "Test Event B") } }
 
-  before do
-    sign_in user
-  end
+  before { sign_in user }
 
   describe "GET #index" do
     it "assigns @events and renders the index template" do
@@ -43,8 +39,6 @@ RSpec.describe EventsController, type: :controller do
       expect(flash[:notice]).to eq("Event B Created Successfully")
       expect(flash[:alert]).to match(/Email For Event B Sent Successfully to #{user.email}/)
 
-      # You may need to adjust the following expectations based on your implementation
-
       expect(controller).to have_received(:send_event_to_iterable).with("Test Event B", user)
       expect(controller).to have_received(:send_email_notification).with(user, instance_of(Event))
     end
@@ -60,16 +54,10 @@ RSpec.describe EventsController, type: :controller do
 
   describe "#send_email_notification" do
     it "sends email notification using Iterable" do
-      # Create a real instance of Event with FactoryBot and assign an id
-      event = create(:event) # Assuming you have a factory for Event model defined in FactoryBot
-
-      # Stub the 'id' method on the event object to return a dummy value
+      event = create(:event)
       allow(event).to receive(:id).and_return(123)
 
-      # Set up expectation for HTTParty.post
       expect(HTTParty).to receive(:post).with(EventsController::ITERABLE_EMAIL_TARGET_URL, any_args)
-
-      # Call the method under test
       subject.send(:send_email_notification, user, event)
     end
   end
