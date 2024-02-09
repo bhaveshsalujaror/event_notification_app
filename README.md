@@ -1,48 +1,57 @@
-# EventsController
+# Events Application
 
-The EventsController handles the creation of events and the display of all events in the system. It integrates with an external service, Iterable, for event tracking and email notifications.
+This repository contains the source code, assets, and documentation for the Events application.
 
-## Controller Details
+## Setting Up and Running the Application
 
-### Actions
+To set up and run the application, follow these steps:
 
-- **index**: Displays all events.
-- **event_a**: Creates Event A and sends event data to Iterable.
-- **event_b**: Creates Event B, sends data to Iterable, and sends email notification.
+1. Clone the repository to your local machine:
 
-### Before Actions
+    ```bash
+    git clone <repository-url>
+    ```
 
-- **authenticate_user!**: Ensures that the user is authenticated before accessing any actions.
-- **set_events**: Sets up instance variables for displaying events in the index view.
+2. Navigate to the project directory:
 
-### Private Methods
+    ```bash
+    cd events_notification_application
+    ```
 
-- **event_params**: Permits title and description parameters for event creation.
-- **build_event(user)**: Builds a new event object associated with the given user.
-- **save_event_and_handle_response(event, message)**: Saves the event and handles success or failure flash messages.
-- **send_event_to_iterable(event_name, user)**: Sends event data to Iterable for tracking.
-- **send_email_notification(user, event)**: Sends email notification using Iterable.
+3. Install dependencies:
 
-### Constants
+    ```bash
+    bundle install
+    ```
 
-- **ITERABLE_EVENTS_TRACK_URL**: Endpoint for tracking events in Iterable.
-- **ITERABLE_EMAIL_TARGET_URL**: Endpoint for sending email notifications via Iterable.
+4. Set up the database:
 
-## Test Cases
+    ```bash
+    rails db:setup
+    ```
 
-The EventsController is thoroughly tested with RSpec to ensure its functionality.
+5. Start the Rails server:
 
-### Description of Test Cases
+    ```bash
+    rails server
+    ```
 
-1. **GET #index**: Verifies that the index action assigns all events and renders the index template.
-2. **POST #event_a**: Tests the creation of Event A and verifies that data is sent to Iterable.
-3. **POST #event_b**: Tests the creation of Event B, verifies data is sent to Iterable, and checks email notification.
-4. **#send_event_to_iterable**: Ensures that event data is sent to Iterable.
-5. **#send_email_notification**: Verifies that email notification is sent using Iterable.
+6. Open your web browser and navigate to [http://localhost:3000](http://localhost:3000) to access the application.
 
-## Running Tests
+## Over-the-Wire Mocks for Iterable.com API
 
-To run the tests:
+The application includes over-the-wire mocks for interactions with the iterable.com API. These mocks are implemented using WebMock to simulate requests and responses from the Iterable API endpoints. By using mocks, we can test the application's behavior without actually making requests to the external API.
 
-```bash
-rspec spec/controllers/events_controller_spec.rb
+## Trade-offs and Decisions
+
+While implementing the solution, several trade-offs and decisions were made:
+
+- **Use of WebMock**: We chose to use WebMock for mocking interactions with the Iterable API. WebMock provides a simple and flexible way to mock HTTP requests and responses in Ruby applications.
+
+- **Validation**: We added validations to the Event model to ensure that required fields such as title and description are present. These validations help maintain data integrity and prevent invalid data from being saved to the database.
+
+- **Test Coverage**: We ensured thorough test coverage for the application, including controller and service tests. This ensures that the application behaves as expected and provides confidence when making changes or adding new features.
+
+- **Documentation**: We provided clear and comprehensive documentation in the README file to guide users on setting up and running the application. Additionally, we discussed the use of over-the-wire mocks and explained the rationale behind certain decisions made during implementation.
+
+Overall, these decisions were made to ensure the reliability, maintainability, and ease of use of the Events application.
